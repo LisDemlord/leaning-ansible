@@ -1,0 +1,12 @@
+---
+- name: Gather facts from remote servers
+  hosts: webservers
+  gather_facts: yes
+
+  tasks:
+    - name: Run setup module to gather facts
+      setup:
+
+    - name: Show gathered facts
+      debug:
+        var: ansible_facts

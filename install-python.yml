@@ -1,0 +1,59 @@
+---
+- name: install python 3.12.4 on VMs
+  hosts: all
+  become: yes
+  vars_files:
+    - hosts.yml
+  tasks:
+    - name: ensure required packages are installed
+      dnf:
+        name:
+          - gcc
+          - openssl-devel
+          - bzip2-devel
+          - libffi-devel
+          - make
+          - wget
+        state: present
+
+    - name: download python 3.12.4
+      get_url:
+        url: https://www.python.org/ftp/python/3.12.4/Python-3.12.4.tgz
+        dest: /tmp/Python-3.12.4.tgz
+
+    - name: extract python 3.12.4
+      unarchive:
+        src: /tmp/Python-3.12.4.tgz
+        dest: /tmp
+        remote_src: yes
+
+    - name: install python 3.12.4
+      shell: |
+        cd /tmp/Python-3.12.4
+        ./configure --enable-optimizations
+        make altinstall
+
+    - name: Ensure Python 3.12.4 is the default version
+      shell: |
+        alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.12 1
+        alternatives --set python3 /usr/local/bin/python3.12
+
+    - name: verify python version
+      command: python3 --version
+      register: python3_version
+    
+    - name: verify python version
+      command: python --version
+      register: python_version
+
+    - name: show python3 version
+      debug:
+        msg: "(python3 --version) Python version is {{ python3_version.stdout }}"
+
+    - name: show python version
+      debug:
+        msg: "(python --version) Python version is {{ python_version.stdout }}"
+
+
+
+
