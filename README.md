@@ -8,4 +8,4 @@
 - **run-scripts.yml**: Playbook для выполнения скрипта `check_dependecies.sh` на удалённых машинах.
 - **test_setup.yml**: Playbook для тестирования модуля setup.
 
-- Все скрипты и playbook'и протестированы и нормально работают на 2 виртульных машинах (Oracle Linux 9.4) в gnome-box
+## Все скрипты и playbook'и протестированы и нормально работают на 2 виртульных машинах (Oracle Linux 9.4) в gnome-box
