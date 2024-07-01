@@ -2,7 +2,12 @@
 - name: Install and configure Nginx
   hosts: all
   become: true
+  gather_facts: yes
   tasks:
+    - name: Debug hostname
+      debug:
+        msg: "Hostname is {{ ansible_hostname }}"
+
     - name: Install Nginx
       package:
         name: nginx
