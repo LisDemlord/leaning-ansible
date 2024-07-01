@@ -7,14 +7,11 @@
       ping:
       register: ping_result
 
-    - name: Copy script to remote servers
-      copy:
-        src: /home/lisdemlord/Documents/project-ansible/check_dependecies.sh
-        dest: /tmp/check_dependecies.sh
-        mode: '0755'
-
     - name: Run the script and capture the output
-      shell: /tmp/check_dependecies.sh
+      ansible.builtin.script:
+        cmd: /home/lisdemlord/Documents/project-ansible/check_dependecies.sh
+      environment:
+        ANSIBLE_REMOTE_TEMP: /tmp/ansible-test
       register: script_output
 
     - name: Show the ping result
@@ -24,7 +21,6 @@
             pong: {{ ping_result.ping }}
             changed: {{ ping_result.changed }}
             failed: {{ ping_result.failed }}
-
 
     - name: Show the script output
       debug:
