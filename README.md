@@ -1,5 +1,4 @@
 - **check_dependecies.sh**: Скрипт для проверки наличия необходимых пакетов для сборки LFS.
-- **hosts.ini**: Файл инвентаризации в формате INI.
 - **hosts.yml**: Файл инвентаризации в формате YAML.
 - **install-python.yml**: Playbook для установки Python 3.12.4.
 - **nginx.conf.j2**: Файл конфигурации для nginx на VM (сгенерирован ChatGPT и не проверялся).
